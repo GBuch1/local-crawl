@@ -1,0 +1,5 @@
+An input string, this is! (or is it?)
+這是一個輸入字符串，還是？
+هذا هو سلسلة المدخلات، أو هو؟
+C'est une chaîne d'entrée, ou est-ce?
+Esta es una cadena de entrada, o es?

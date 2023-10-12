@@ -1,0 +1,26 @@
+{
+  "seeds": [
+    "/Users/mryu/Documents/Code/CS128_Assignments/HTML/net_bible/index.htm"
+  ],
+  "options": {
+    "remove_stopwords": true,
+    "stopwords_lang": "english"
+  },
+  "agent_config": {
+    "external": [
+      "https://",
+      "http://"
+    ],
+    "encoding": "UTF-8",
+    "parser": "html.parser",
+    "tags": {
+      "div": {
+        "class": [
+          "p",
+          "q"
+        ]
+      }
+    },
+    "debug": true
+  }
+}

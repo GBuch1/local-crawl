@@ -1,0 +1,21 @@
+{
+  "seeds": [
+    "/Users/mryu/Documents/Code/CS128_Assignments/HTML/flight_from_the_dark/title.htm"
+  ],
+  "options": {
+    "remove_stopwords": true,
+    "stopwords_lang": "english"
+  },
+  "agent_config": {
+    "external": [
+      "https://",
+      "http://"
+    ],
+    "encoding": "UTF-8",
+    "parser": "html.parser",
+    "tags": {
+      "p": {}
+    },
+    "debug": true
+  }
+}

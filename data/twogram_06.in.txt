@@ -1,0 +1,85 @@
+Palindrome
+			
+								From Wikipedia, the free encyclopedia
+								
+												
+					Jump to:					navigation, 					search
+				
+				"Palindromes" redirects here. For the film, see Palindromes (film).
+
+
+This article needs additional citations for verification. Please help improve this article by adding citations to reliable sources. Unsourced material may be challenged and removed. (May 2007)
+A palindrome is a word, phrase, number, or other sequence of symbols or elements, whose meaning may be interpreted the same way in either forward or reverse direction.[1] Famous examples include "Amore, Roma", "A man, a plan, a canal: Panama" and "No 'x' in 'Nixon'".
+Composing literature in palindromes is an example of constrained writing. The word "palindrome" was coined from the Greek roots palin (Ï€Î¬Î»Î¹Î½; "again") and dromos (Î´Ï�Ã³Î¼Î¿Ï‚; "way, direction") by the English writer Ben Jonson in the 17th century. The Greek phrase to describe the phenomenon is karkinikÃª epigrafÃª (ÎºÎ±Ï�ÎºÎ¹Î½Î¹Îºá½´ ÎµÏ€Î¹Î³Ï�Î±Ï†Î®; "crab inscription"), or simply karkinoi (ÎºÎ±Ï�ÎºÎ¯Î½Î¿Î¹; "crabs"), alluding to the movement of crabs, such as an inscription that may be read backwards.
+
+
+
+Contents
+
+1 History
+1.1 Palindromes in Arabic language
+1.1.1 In the Quran1.1.2 In Arabic literature
+1.2 Palindromes in ancient Sanskrit1.3 Palindromes in Tamil poetry1.4 Palindromes in Persian (Farsi)
+2 Types
+2.1 Character, word, or line unit2.2 Phrases2.3 Famous English palindromes2.4 Names2.5 Molecular biology2.6 Numbers2.7 Acoustics
+2.7.1 Classical music2.7.2 Popular music
+2.7.2.1 Musical content2.7.2.2 Lyrics2.7.2.3 Names and titles
+2.7.3 Comics2.7.4 Television
+
+3 Long palindromes4 Biological structures5 Computation theory6 Semordnilap7 Non-English palindromes8 See also9 References10 External links
+
+
+History[edit]
+
+
+
+
+The Sator Square.
+
+
+Palindromes date back at least to 79 AD, as a palindrome was found as a graffito at Herculaneum, a city buried by ash in that year. This palindrome, called the Sator Square, consists of a sentence written in Latin: "Sator Arepo Tenet Opera Rotas" ("The sower Arepo holds with effort the wheels"). It is remarkable for the fact that the first letters of each word form the first word, the second letters form the second word, and so forth. Hence, it can be arranged into a word square that reads in four different ways: horizontally or vertically from either top left to bottom right or bottom right to top left. As such, they can be referred to as palindromatic.
+A palindrome with the same property is the Hebrew palindrome, "We explained the glutton who is in the honey was burned and incinerated", (×¤×¨×©× ×• ×¨×¢×‘×ª×Ÿ ×©×‘×“×‘×© × ×ª×‘×¢×¨ ×•× ×©×¨×£; perashnu: ra`avtan shebad'vash nitba'er venisraf), by Abraham ibn Ezra, referring to the halachic question as to whether a fly landing in honey makes the honey treif (non-kosher).
+×•× ×©×¨×¤×Ÿ×ª×‘×¢×¨×©×‘×“×‘×©×¨×¢×‘×ª× ×£×¨×©× ×•
+Another Latin palindrome, "In girum imus nocte et consumimur igni" ("We go wandering at night and are consumed by fire", in which "In girum ire" is translated as "go wandering" instead of the literal "go in a circle", cf. Italian "andare in giro", "go strolling or wandering around"), was said to describe the behavior of moths. It is likely that this palindrome is from medieval rather than ancient times.
+Byzantine Greeks often inscribed the palindrome, "Wash [the] sins, not only [the] face" Î�Î™Î¨ÎŸÎ� Î‘Î�ÎŸÎœÎ—ÎœÎ‘Î¤Î‘ ÎœÎ— ÎœÎŸÎ�Î‘Î� ÎŸÎ¨Î™Î� ("NÄ«pson anomÄ“mata mÄ“ mÅ�nan Å�psin", engraving "ps" with the single Greek letter Î¨, psi), on baptismal fonts. This practice was continued in many English churches. Examples include the font at St. Mary's Church, Nottingham and also the font in the basilica of St. Sophia, Constantinople, the font of St. Stephen d'Egres, Paris; at St. Menin's Abbey, OrlÃ©ans; at Dulwich College; and at the following churches: Worlingworth (Suffolk), Harlow (Essex), Knapton (Norfolk), St Martin, Ludgate (London), and Hadleigh (Suffolk).
+Palindromes in Arabic language[edit]
+Arabic language is an abjad; that is, only consonants are represented as letters. Vowels are not visible as letters. Instead, they can be represented using diacritics. Palindromes in Arabic are taken from letters (consontants) only, disregarding vowels that follow/proceed them. Examples are shown below.
+In the Quran[edit]
+Ø±Ø¨Ùƒ Ù�ÙƒØ¨Ø± (transl.: rabbaka fakabbir, [And] your Lord glorify) (Quran 74:3)
+The sentence reads rabbaka fakabbir. Here, reading the sentence backwards including vowels would not create a palindrome. However, taking out consonants only (which are here: r, b, k, f, k, b, r) can clearly create a palindrome.
+ÙƒÙ„ Ù�Ù‰ Ù�Ù„Ùƒ (transl.: kullun fi falak, ... [but] each, in an orbit, is swimming) (Quran 36:40)
+Consontants are: k, l, f, y, f, l, k.
+In Arabic literature[edit]
+There is a verse in a poem credited to an anonymous that is fully reversible. The verse reads:
+Ù…ÙˆØ¯ØªÙ‡ ØªØ¯ÙˆÙ… Ù„ÙƒÙ„ Ù‡ÙˆÙ„ * ÙˆÙ‡Ù„ ÙƒÙ„ Ù…ÙˆØ¯ØªÙ‡ ØªØ¯ÙˆÙ…
+The verse transliterates to: mawaddatuhu tadumu likulli hawlin * wahal kullu mawaddatihi tadumu; and translates to: His cordiality lasts despite all calamities * but, will all of his cordiality last? Consonants are: m, w, d, t, h, t, d, w, m, l, k, l, h, w, [l], w, h, l, k, l, m, w, d, t, h, t, d, w, m; with [l] being the mid letter.
+Palindromes in ancient Sanskrit[edit]
+Palindromes of considerable complexity were experimented with in Sanskrit poetry.[2] Complex palindromes appear in the 19th canto of the 8th-century epic poem ÅšiÅ›upÄ�la-vadha by Magha. It yields the same text if read forward, backward, down, up, or diagonally:
+sa-ka-ra-na-na-ra-ka-sa-kÄ�-ya-sÄ�-da-da-sÄ�-ya-kÄ�ra-sÄ�-ha-vÄ�vÄ�-ha-sÄ�-ra-nÄ�-da-vÄ�-da-da-vÄ�-da-nÄ�.(nÄ�davÄ�dadavÄ�danÄ�rasÄ�havÄ�vÄ�hasÄ�rakÄ�yasÄ�dadasÄ�yakÄ�sakÄ�ranÄ�nÄ�rakÄ�sa)
+(Note: a hyphen indicates a continuation of same word.) The last four lines are an inversion of the first four and are not part of the verse. They are included here only so that its properties may be more easily discerned, as the up-and-down reading depends on re-reading the text back up again in each column.
+The stanza translates as:
+[That army], which relished battle (rasÄ�havÄ�), contained allies who brought low the bodes and gaits of their various striving enemies (sakÄ�ranÄ�nÄ�rakÄ�sakÄ�yasÄ�dadasÄ�yakÄ�), and in it the cries of the best of mounts contended with musical instruments (vÄ�hasÄ�ranÄ�davÄ�dadavÄ�danÄ�).
+The same work (ÅšiÅ›upÄ�la-vadha) also contains stanzas in which each line is a palindrome, and stanzas that may be read backward to give a new stanza (semordnilaps). Such stanzas are also found in the earlier work KirÄ�tÄ�rjunÄ«ya.
+This Sanskrit poem was written by "nandi-ghanta kavis" in kanda style.
+à¤¸à¤¾à¤°à¤¸ à¤¨à¤¯à¤¨à¤¾ à¤˜à¤¨ à¤œà¤˜
+à¤¨à¤¾à¤°à¤šà¤¿à¤¤ à¤°à¤¤à¤¾à¤° à¤•à¤²à¤¿à¤• à¤¹à¤° à¤¸à¤¾à¤° à¤°à¤¸à¤¾
+à¤¸à¤¾à¤° à¤°à¤¸à¤¾à¤°à¤¹ à¤•à¤²à¤¿à¤•à¤°
+à¤¤à¤¾à¤°à¤¤ à¤šà¤¿à¤°à¤¨à¤¾à¤˜ à¤œà¤¨à¤˜ à¤¨à¤¾à¤¯à¤¨à¤¸à¤°à¤¸à¤¾ |
+Palindromes in Tamil poetry[edit]
+Palindromes are referred to in Tamil as "Maalai Maatru" (à®®à®¾à®²à¯ˆ à®®à®¾à®±à¯�à®±à¯�). The earliest known palindromic verses (11 couplets) occur in the devotional poetry of the Shaivism saint Sambandhar who lived around the 7th Century C.E.
+The first of these eleven verses runs thus:
+à®¯à®¾à®®à®¾à®®à®¾à®¨à¯€ à®¯à®¾à®®à®¾à®®à®¾ à®¯à®¾à®´à¯€à®•à®¾à®®à®¾ à®•à®¾à®£à®¾à®•à®¾
+à®•à®¾à®£à®¾à®•à®¾à®®à®¾ à®•à®¾à®´à¯€à®¯à®¾ à®®à®¾à®®à®¾à®¯à®¾à®¨à¯€ à®®à®¾à®®à®¾à®¯à®¾
+It refers to Shiva as the incomparable God, the one who plays the Veena, the beautiful one adorned with snakes, the one who destroyed Kama, whose abode is Sirkazhi, who also appears as Vishnu, and beseeches him (Shiva) to rid the devotee of impurities.
+Palindromic verses are also to be found in Madhava Shivagnana Yogi's Kanchi Puranam (à®®à®¾à®¤à®µà®šà¯�à®šà®¿à®µà®žà®¾à®©à®¯à¯‹à®•à®¿à®•à®³à¯� à®•à®¾à®žà¯�à®šà®¿à®ªà¯� à®ªà¯�à®°à®¾à®£à®®à¯�) and in Mahavidvaan Meenakshi Sundaram Pillai's Thirunaagaik Kaaronap Puranam (à®®à®•à®¾à®µà®¿à®¤à¯�à®¤à¯�à®µà®¾à®©à¯� à®®à¯€à®©à®¾à®Ÿà¯�à®šà®¿à®šà¯�à®¨à¯�à®¤à®°à®®à¯� à®ªà®¿à®³à¯�à®³à¯ˆ à®¤à®¿à®°à¯�à®¨à®¾à®•à¯ˆà®•à¯� à®•à®¾à®°à¯‹à®£à®ªà¯� à®ªà¯�à®°à®¾à®£à®®à¯�).[3]
+Palindromes in Persian (Farsi)[edit]
+A famous example that most students in Iran have heard in literature classes is:
+Ø´Ú©Ø± Ø¨ØªØ±Ø§Ø²ÙˆÛŒ ÙˆØ²Ø§Ø±Øª Ø¨Ø±Ú©Ø´
+literally could be translated to "weigh the sugar with the ministry scale"
+Types[edit]
+Character, word, or line unit[edit]
+The most familiar palindromes, in English at least, are character-by-character: The written characters read the same backward as forward. Some examples of common palindromic words: civic, radar, level, rotor, noon, kayak, reviver, racecar, redder, madam, Malayalam, and refer. There are also palindromes where the unit of reversal is the word ("So patient a doctor to doctor a patient so") or line (as in the poem "Doppelganger" by J.A. Lindon). These are referred to as "word-unit palindromes" and "line-unit palindromes" respectively.[4] Word-unit palindromes were popularized in the recreational linguistics community by J.A. Lindon in the 1960s, but occasional examples in English are found from at least the 19th century, and several in French and Latin date to the Middle Ages.[5]
+Phrases[edit]
+Palindromes often consist of a phrase or sentence, e.g.: "Eva, can I stab bats in a cave?", "Mr. Owl ate my metal worm", "Was it a car or a cat I saw?", "A nut for a jar of tuna", "Do geese see God?", "Ma is as selfless as I am", "On a clover, if alive erupts a vast pure evil, a fire volcano." "Dammit, I'm mad!", "A Toyota's a Toyota", "Go hang a salami, I'm a lasagna hog", and "A Santa lived as a devil at NASA". Punctuation, capitalization, and spacing are usually ignored, although some, such as "Rats live on no evil star" and "Step on no pets", include the spacing.
+Famous English palindromes[edit]
+Some well-known English palindromes are, "Able was I ere I saw Elba",[6] "A man, a plan, a canal - Panama!",[7] "Madam,...
