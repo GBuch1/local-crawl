@@ -2,9 +2,9 @@
 """Provides `Pair`, `TwoGram`, and `Frequency` classes as data models for text processing.
 """
 
-__author__ = "Boaty McBoatface, Planey McPlaneface"
+__author__ = "Garrett Buchanan, Livingstone Rwagatare"
 __copyright__ = "Copyright 2023, Westmont College"
-__credits__ = ["Boaty McBoatface", "Planey McPlaneface",
+__credits__ = ["Garrett Buchanan", "Livingstone Rwagatare",
                "Donald J. Patterson", "Mike Ryu", ]
 __license__ = "MIT"
 __email__ = "mryu@westmont.edu"
@@ -26,26 +26,22 @@ class Pair:
     @property
     def object1(self) -> object:
         """Getter for `object1`."""
-        # TODO: implement me
-        return None
+        return self._object1
 
     @object1.setter
     def object1(self, o1: object) -> None:
         """Setter for `object1`."""
-        # TODO: implement me
-        pass
+        self._object1 = o1
 
     @property
     def object2(self) -> object:
         """Getter for `object2`."""
-        # TODO: implement me
-        return None
+        return self._object2
 
     @object2.setter
     def object2(self, o2: object) -> None:
         """Setter for `object2`."""
-        # TODO: implement me
-        pass
+        self._object2 = o2
 
     def __eq__(self, other: object) -> bool:
         """Compares `self` to `other` (object) given to return `True` if equal and `False` otherwise.
@@ -56,8 +52,15 @@ class Pair:
             other: Object to compare to `self`. May be `None`.
 
         """
-        # TODO: implement me
-        return False
+        # The __eq__ function first makes sure that the parameter "other"
+        # is in the class "Pair". If "other" is in "Pair" it then compares 
+        # the 'key' of self.object1 to the 'key' of other.object1 followed 
+        # by the 'value' of self.object2 to the 'value' of other.object2 and
+        # returns it
+        
+        if not isinstance(other, Pair):
+            return False
+        return self.object1 == other.object1 and self.object2 == other.object2        
 
     def __str__(self) -> str:
         """Returns the string representation of `Pair` in this format: "<object1:object2>".
@@ -65,8 +68,27 @@ class Pair:
         If either `key` (`object1`) or `value` (`object2`) is `None`, "None" is used in their place.
 
         """
-        # TODO: implement me
-        return ""
+        # The __str__ function first creates the variables object1_string and
+        # object2_string and sets them equal to self.object1 and self.object2
+        # respectively as strings. It then passes object1 through an if statement
+        # to determine if the object is 'None'. If the object is 'None', then an
+        # else statement is used to set the variable object1_string equal to the
+        # string value "None". The same process is repeated for object2. Finally
+        # the function returns the values of object1_string and object2_string in
+        # the format "<object1_string:object2_string>".
+        
+        object1_string = str(self.object1)
+        object2_string = str(self.object2)
+        if self.object1 is not None:
+            object1_string = str(self.object1)
+        else:
+            object1_string = "None"
+        if self.object2 is not None:
+            object2_string = str(self.object2)
+        else:
+            object2_string = "None"
+       
+        return f"<{object1_string}:{object2_string}>"
 
     def __hash__(self) -> int:
         """Returns the result of hashing both `key` and `value`.
@@ -126,30 +148,48 @@ class TwoGram(Pair):
         return False
 
     def __ne__(self, other: object) -> bool:
-        """Complement of __eq__, used to support the `!=` (not equals) operation."""
-        # TODO: implement me [HINT: use `__eq__` from above; this should be a one-liner]
-        return False
+        """Complement of __eq__, used to support the `!=` (not equals) operation."""        
+        # Done: Teplaced return False with  -> return not self.__eq__(other)
+        #comment: complement of __eq__, used to support != (not equals) operation. "" 
+        return not self.__eq__(other)
+    
+    
 
     def __lt__(self, other: object) -> bool:
-        """Returns `True` if `self` < `other`, `False` otherwise."""
-        # TODO: implement me [HINT: use `_compare_token_pairs` from below; this should be a one-liner]
-        return False
+        """Returns `True` if `self` < `other`, `False` otherwise."""        
+        # Todo: modifying return False 
+        # Done: Replaced return False -> return self._compare_token_pairs(other) == -1
+        #comment: Returns True if self < other, False  otherwise
+        return self._compare_token_pairs(other) == -1
+    
+    
 
     def __le__(self, other: object) -> bool:
         """Returns `True` if `self` <= `other`, `False` otherwise."""
-        # TODO: implement me [HINT: use `_compare_token_pairs` from below; this should be a one-liner]
-        return False
+        #Done: implemented comparison_result = self._compare_token_pairs(pairs) 
+        #Done: Changed return False to  return comparison_result == -1 or comparison_result == 0
+        comparison_result = self._compare_token_pairs(other)
+        return comparison_result == -1 or comparison_result == 0
 
     def __gt__(self, other: object) -> bool:
         """Returns `True` if `self` > `other`, `False` otherwise."""
-        # TODO: implement me [HINT: use `_compare_token_pairs` from below; this should be a one-liner]
-        return False
+        # Done: changed return False -> retur self.compare_token_pair(other ) ==1
+        #Comment: #"""Returns `True` if `self` > `other`, `False` otherwise.""" 
+        return self._compare_token_pairs(other) ==1 
+    
+
+
 
     def __ge__(self, other: object) -> bool:
+    
         """Returns `True` if `self` >= `other`, `False` otherwise."""
-        # TODO: implement me [HINT: use `_compare_token_pairs` from below; this should be a one-liner]
-        return False
-
+        # done: implemented comparison result 
+        #done: modified return False -> return comparison_result ==1 or comparison_result ==0
+        
+        comparison_result = self._compare_token_pairs(other)
+        return comparison_result ==1 or comparison_result ==0  
+    
+    
     def __hash__(self) -> int:
         """Reuses `Pair`'s hash method.
 
@@ -157,8 +197,9 @@ class TwoGram(Pair):
          __hash___() to None because we are implementing __eq__ but not __hash__.
 
         """
-        # TODO: implement me [HINT: just call the superclass' `__hash__`]
-        return 0
+        #Done: changed return 0 -> return super().__hash__()
+        #Comment: I'll check if it works properly, but it should. 
+        return super().__hash__()
 
     def _compare_token_pairs(self, other: object) -> int:
         """Java-style comparator method to make rich comparisons simpler.
@@ -175,6 +216,8 @@ class TwoGram(Pair):
                 return first_tokens
             else:
                 return _compare_tokens(self.object2, other.object2)
+
+# this is the end of TwoGram(pair) class. I implemented all todo following given instructions. 
 
 
 def _compare_tokens(t1: object, t2: object) -> int:
@@ -214,25 +257,24 @@ class Frequency:
              ValueError: If `token` parameter is not of type `str` or `TwoGram`.
 
         """
-        # TODO: implement me [HINT: use `ValueError("A token must either be of type str or TwoGram.")`]
-        pass
+        if not isinstance(token, (str,TwoGram)):
+            raise ValueError("Token parameter is not of type String or TwoGram")
+        self._token = token
+        self._freq = freq
 
     @property
     def token(self) -> object:
         """Getter for `token`."""
-        # TODO: implement me
-        return None
+        return self._token
 
     @property
     def freq(self) -> int:
         """Getter for `freq`."""
-        # TODO: implement me
-        return 0
+        return self._freq
 
     def increment_freq(self) -> None:
         """Increments the freq by 1."""
-        # TODO: implement me
-        pass
+        self._freq = self._freq + 1
 
     def __eq__(self, other: object) -> bool:
         """Compares `self` to `other` (object) given to return `True` if equal and `False` otherwise.
@@ -243,47 +285,52 @@ class Frequency:
             other: Object to compare to `self`. May be `None`.
 
         """
-        # TODO: implement me.
-        return False
+        # if not isinstance(other, Pair):
+        #     return False
+        # return self.object1 == other.object1 and self.object2 == other.object2  
+    
+        if not isinstance(other, Frequency):
+            return False
+        if self.token == other.token and self.freq == other.freq:
+            return True
+        else:
+            return False
 
     def __ne__(self, other: object) -> bool:
         """Complement of __eq__, used to support the `!=` (not equals) operation."""
-        # TODO: implement me
-        return False
+        return not self.__eq__(other)
+    
 
     def __lt__(self, other: object) -> bool:
-        """Returns `True` if `self` < `other`, `False` otherwise."""
-        # TODO: implement me
-        return False
+        """Returns `True` if `self` < `other`, `False` otherwise."""        
+        return self._compare_frequency(other) < 1 
 
     def __le__(self, other: object) -> bool:
         """Returns `True` if `self` <= `other`, `False` otherwise."""
-        # TODO: implement me
-        return False
-
+        return self._compare_frequency(other) <= 0
+      
     def __gt__(self, other: object) -> bool:
         """Returns `True` if `self` > `other`, `False` otherwise."""
-        # TODO: implement me
-        return False
+        return self._compare_frequency(other) > -1
 
     def __ge__(self, other: object) -> bool:
         """Returns `True` if `self` >= `other`, `False` otherwise."""
-        # TODO: implement me
-        return False
+        return self._compare_frequency(other) >= 0 
 
     def __str__(self):
         """Returns the string representation of `Frequency` in this format: "token:freq"."""
-        # TODO: implement me
-        return ""
-
+        return f"{self._token}:{self._freq}"
+    
     def __hash__(self) -> int:
         """Returns the result of hashing both `token` and `freq`.
 
         In other words, any `Frequency` with the same `token` and `freq` attributes should have the same hash.
 
         """
-        # TODO: implement me [HINT: this will very similar to the `__hash__` in class `Pair`]
-        return 0
+        # if isinstance(str, TwoGram) and (self._token == self._freq):
+        #     return hash((self._token,self._freq))
+        return hash((self._token,self._freq))
+    
 
     def _compare_frequency(self, other: object) -> int:
         """Java-style comparator method to make rich comparisons simpler.
@@ -292,5 +339,18 @@ class Frequency:
         Types that do not match (including `NoneType`) are considered < any `Frequency`.
 
         """
-        # TODO: implement me [HINT: this will be somewhat similar to TwoGram._compare_token_pairs]
-        return 0
+        # Checks for types that are not in Frequency and returns 1 making said type less than any Frequency
+        if other is None or not isinstance (other, Frequency):
+            return 1
+        if self._freq > other._freq:
+            return -1
+        elif self.freq < other.freq:
+            return 1
+        # Compare tokens to act as tie if the frequencies are equal
+        else:
+            if self._token < self._token:
+                return -1
+            elif self._token > self._token:
+                return 1
+            else:
+                return 0
