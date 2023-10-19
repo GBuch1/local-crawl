@@ -7,9 +7,9 @@ import argparse
 from text_processing.freq_models import TwoGram, Frequency
 from text_processing.freq_utils import tokenize_file, print_frequencies
 
-__author__ = "Boaty McBoatface, Planey McPlaneface"
+__author__ = "Garrett Buchanan, Livingstone Rwagatare"
 __copyright__ = "Copyright 2023, Westmont College"
-__credits__ = ["Boaty McBoatface", "Planey McPlaneface",
+__credits__ = ["Garrett Buchanan", "Livingstone Rwagatare",
                "Donald J. Patterson", "Mike Ryu", ]
 __license__ = "MIT"
 __email__ = "mryu@westmont.edu"
@@ -22,10 +22,16 @@ def main() -> None:
         pars.error("Processing mode must be either 1 (word) or 2 (twogram).")
 
     try:
-        # TODO: stitch everything together HERE.
-        # TODO: when `open`ing a file, use `encoding="UTF-8"`
-
-        # TODO: print the output to `sys.stdout` stream if the `-v` switch/flag was given.
+        with open(args.input_file_path, 'r', encoding="UTF-8") as input_file:
+            tokens = tokenize_file(input_file)
+        if args.processing_mode == 1:
+            frequencies = compute_word_freq(tokens)
+        elif args.processing_mode == 2:
+            frequencies = compute_twogram_freq(tokens)
+        with open(args.output_file_path, 'w', encoding="UTF-8") as output_file:
+            if args.verbose:
+                print_frequencies(frequencies, sys.stdout)
+            print_frequencies(frequencies, output_file)
         if args.verbose:  # DO NOT get rid of this -- this will be useful in debugging.
             pass
     except OSError as e:  # Leave this `except` block as-is.
@@ -66,9 +72,21 @@ def compute_word_freq(tokens: list[str]) -> list[Frequency]:
         >>> print(list(map(str, word_freq)))
         ["sentence:2", "repeats:1", "the:1", "this:1",  "word:1"]
     """
-    # TODO: implement me
-    return []
-
+    # Returns an empty list if tokens is type None of there is nothing in the inputed list
+    if tokens is None or len(tokens) == 0:
+        return[]
+    # Create a dictionary
+    wordsFrequency = {}
+    # Iterate through tokens until there is nothing left in tokens
+    for token in tokens:
+        if token in wordsFrequency:
+            wordsFrequency[token] += 1
+        else:
+            wordsFrequency[token] = 1
+    # Create a list freq_list       
+    freq_list = [Frequency(word, count) for word, count in wordsFrequency.items()]
+    # Return the sorted freq list
+    return sorted(freq_list, key=lambda x: (-x.freq, x.token))
 
 def compute_twogram_freq(tokens: list[str]) -> list[Frequency]:
     """Takes the input list of words and processes it, returning a list of `Frequency`s.
@@ -98,8 +116,22 @@ def compute_twogram_freq(tokens: list[str]) -> list[Frequency]:
              1 <think:you>
              1 <you:know>
     """
-    # TODO: implement me
-    return []
+    # Returns an empty list if tokens is type None of there is nothing in the inputed list
+    if tokens is None or len(tokens) == 0:
+        return []
+    # Create a dictionary for twogramFrequencies
+    twogramFrequencies = {}
+    # Iterate through tokens until there is nothing left in tokens
+    for i in range(len(tokens) - 1):
+        twogram = TwoGram(tokens[i], tokens[i+1])
+        if twogram in twogramFrequencies:
+            twogramFrequencies[twogram] += 1
+        else:
+            twogramFrequencies[twogram] = 1
+    # Create a list freq_list
+    freq_list = [Frequency(twogram, count) for twogram, count in twogramFrequencies.items()]
+    # Return the sorted list
+    return sorted(freq_list, key=lambda x: (-x.freq, x.token))
 
 
 if __name__ == '__main__':
