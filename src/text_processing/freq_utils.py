@@ -7,9 +7,9 @@ import re
 from io import TextIOWrapper
 from text_processing.freq_models import Frequency
 
-__author__ = "Boaty McBoatface, Planey McPlaneface"
+__author__ = "Garrett Buchanan, Livingstone Rwagatare"
 __copyright__ = "Copyright 2023, Westmont College"
-__credits__ = ["Boaty McBoatface", "Planey McPlaneface",
+__credits__ = ["Garrett Buchanan", "Livingstone Rwagatare",
                "Donald J. Patterson", "Mike Ryu", ]
 __license__ = "MIT"
 __email__ = "mryu@westmont.edu"
@@ -22,9 +22,9 @@ def tokenize_file(file_obj: TextIOWrapper) -> list:
         file_obj (TextIOWrapper): file to tokenize.
 
     Yields:
-        A list of these tokens, ordered according to their occurrence in the original text file.
-        Non-alphanumeric characters except for `'` delineate tokens, and are discarded.
-        Tokens should not span multiple lines and words are also normalized to lower case.
+        A list of these tokens, ordered according to their occurrence in the original text file. #Iterate
+        Non-alphanumeric characters except for `'` delineate tokens, and are discarded. #Find Proper Regex
+        Tokens should not span multiple lines and words are also normalized to lower case. # Format Properly
 
     Example:
         Given the file object containing: "An input string, this is! (or isn't it?) 123-45"
@@ -33,9 +33,23 @@ def tokenize_file(file_obj: TextIOWrapper) -> list:
         >>> tokenize_file(fo)
         ["an", "input", "string", "this", "is", "or", "isn't", "it", "123", "45"]
     """
-    # TODO: implement me [HINT: use regexr.com and re; the regex required here is quite simple!]
-    return []
-
+    #Attempt 1:
+    #How it works / Comment:
+        #token_pattern will match words which may include numbers and apostrophes
+        #Then we iterate over each line of the file_obj
+        #Each line is converted to lower case then all words are found using re.findal and appended to the tokens list
+        #finally tokes list is returned
+        #downflows:
+        #This code can't help us when dealing with large files - altenatively we can use yield
+    token_pattern = re.compile(r"[\w']+")
+    tokens = []
+    # Process the file line by line
+    for line in file_obj:
+        # Normalize to lower case
+        line = line.lower()
+        # Find all tokens in the line and add them to the tokens list
+        tokens.extend(re.findall(token_pattern, line)) 
+    return tokens
 
 def print_frequencies(freqs: list[Frequency], out: TextIOWrapper) -> None:
     """Takes a list of `Frequency`s and outputs it to the stream passed in via the `out` argument.
@@ -74,8 +88,20 @@ def print_frequencies(freqs: list[Frequency], out: TextIOWrapper) -> None:
              1 think you
              3 you know
     """
-    # TODO: implement me
-    try:
+    
+    total_items = 0
+    for freq in freqs:
+        total_items += freq.freq
+            
+    unique_items = len(set(freqs))
+     
+    # Print out total and unique items  
+    out.write(f"{total_items:>6} total items\n")
+    out.write(f"{unique_items:>6} unique items\n\n")
+    
+    for freq in freqs:
+        out.write("{:6d} {}\n".format(freq.freq, freq.token))
+    try:      
         pass
     except IOError as e:  # Leave this `except` block as-is.
         print("Encountered an error while printing:", e)
