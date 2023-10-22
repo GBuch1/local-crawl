@@ -169,6 +169,48 @@ class OrbUriFrontier(SpiderUriFrontier):
 
 class OrbDB(SpiderDB):
     """TODO: Implement this class and complete the class docstring."""
+
+    def __int__(self):
+        self._database = []
+
+    @abstractmethod
+    def __len__(self) -> int:
+        """Returns the number of `SpiderArtifact`'s that are currently in the database."""
+        return len(self._database)
+       #pass
+
+    @abstractmethod
+    def __contains__(self, item: SpiderArtifact) -> bool:
+        """Returns `True` if the given `SpiderArtifact` is in the database, `False` otherwise."""
+        return
+        #pass
+
+    @abstractmethod
+    def add(self, item: SpiderArtifact) -> bool:
+        """Attempts to add the given `SpiderArtifact` and returns `True` if the add operation was successful,
+        and `False` if the operation was unsuccessful and the given `SpiderArtifact` was not added to the database.
+
+        """
+
+        #pass
+
+    @abstractmethod
+    def remove(self, item: SpiderArtifact) -> bool:
+        """Attempts to remove the specified `SpiderArtifact` and returns `True` if the operation was successful,
+        and `False` if the removal was unsuccessful and the given `SpiderArtifact` remains in the DB.
+
+        """
+        pass
+
+    def add_all(self, *args):
+        """Adds all `SpiderArtifact`'s passed in via `args` by invoking `self.add` on each `SpiderArtifact` instance.
+
+        First instance in the `args` gets added first, and the last instance in the `args` gets added last.
+
+        """
+        for item in args:
+            self.add(item)
+
     pass
 
 
