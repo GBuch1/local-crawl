@@ -17,17 +17,53 @@ __email__ = "mryu@westmont.edu"
 
 class OrbDocFP(SpiderDocFP):
     """TODO: Implement this class and complete the class docstring."""
-    pass
+
+    def __init__(self, doc_fp):
+        self.doc_fp = doc_fp
+
+    def __hash__(self):
+        return hash(self.doc_fp)
+
+    def __eq__(self, other) -> bool:
+        if other is None or not isinstance(other, OrbDocFP):
+            return False
+        else:
+            return self.doc_fp == other.doc_fp
+
+    def __str__(self) -> str:
+        return f"{self.doc_fp}"
 
 
 class OrbDoc(SpiderDoc):
     """TODO: Implement this class and complete the class docstring."""
-    pass
+
+    def __eq__(self, other) -> bool:
+        if other is None or not isinstance(other, SpiderDoc) or self is None or not isinstance(other, SpiderDoc):
+            return False
+        else:
+            return self.content == other.content and self.title == other.title
+
+    def __hash__(self):
+        return hash(self.content, self.title)
+
+    def __str__(self) -> str:
+        return f"{self.content}, {self.title}"
+
+    def _compute_fingerprint(self) -> None:
+        self._fingerprint = f"{self.content}{self.title}"
 
 
 class OrbURI(SpiderURI):
     """TODO: Implement this class and complete the class docstring."""
-    pass
+
+    def __eq__(self, other) -> bool:
+        if other is None or not isinstance(other, OrbURI):
+            return False
+        else:
+            return self._uri == other.uri
+
+    def __hash__(self):
+        return hash((self.uri, self.uri))
 
 class OrbContentProcessor(SpiderContentProcessor):
     """TODO: Implement this class and complete the class docstring.
