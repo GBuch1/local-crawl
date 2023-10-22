@@ -14,6 +14,8 @@ __credits__ = ["Boaty McBoatface", "Planey McPlaneface", "Mike Ryu"]
 __license__ = "MIT"
 __email__ = "mryu@westmont.edu"
 
+from src.spider.spider_models import SpiderDB
+
 
 class OrbDocFP(SpiderDocFP):
     """TODO: Implement this class and complete the class docstring."""
@@ -66,7 +68,10 @@ class OrbURI(SpiderURI):
         return hash((self.uri, self.uri))
 
 class OrbContentProcessor(SpiderContentProcessor):
+
+
     """TODO: Implement this class and complete the class docstring.
+    
 
     HINT:
         Lazily evaluate whether the content has been seen by checking if the document `__next__` method is about
@@ -74,10 +79,24 @@ class OrbContentProcessor(SpiderContentProcessor):
         fingerprint already stored in the database, but add any new document's fingerprint to the database.
 
     """
-    pass
+
+    def __init__(self, agent: OrbAgent):
+        super().__init__(agent)
+        self._seen_docs = set() # this set will track documents that have been seen.
+
+    def process(self, soup: BeautifulSoup):
+        doc = OrbDoc()
+        doc.content = soup.get_text() # extracts the text content of HTML
+        doc.title = soup.title.string if soup.title else "" # extracts the title of the document if present
+        doc._compute_fingerprint() # compute a unique fingerprint of the document
+
+        if doc._fingerprint not in self._agent.doc_db: # Checking if the document fingerprint is in the agent's doc_db
+            self._agent.doc_db.add(doc._fingerprint) # if not seen before, add to the database.
+            self._seen_docs.add(doc) # add the set of seen documents
 
 
 class OrbLinkProcessor(SpiderLinkProcessor):
+
     """TODO: Implement this class and complete the class docstring.
 
     HINT:
@@ -87,7 +106,17 @@ class OrbLinkProcessor(SpiderLinkProcessor):
             {"parent": self._agent.uri.uri}
 
     """
-    pass
+    def __init__(self,agent: OrbAgent):
+        super().__init__(agent)
+        self.seen_uris = set() # set to track seen uris
+    def process(self,link):
+        uri =OrbURI(link.get('href'))
+        uri.props = {"parent": self._agent.uri.uri} # set the properties for the URI,specifically the parent link
+
+
+        if uri not in self._agent.uri_db: # check if the URI is in the agent's uri_db
+            self._agent.uri_db.add(uri) # if not seen before, add to the database
+            self._seen_uris.add(uri) # add to the set of seen URIs
 
     @staticmethod
     def is_link_external(agent: SpiderAgent, link: str) -> bool:
@@ -169,7 +198,17 @@ class OrbUriFrontier(SpiderUriFrontier):
 
 class OrbDB(SpiderDB):
     """TODO: Implement this class and complete the class docstring."""
-    pass
+    def __init__(self):
+        self.db = set() # using a set to store items in memory
+
+    def add(self,item):
+        self._db.add(item)
+
+    def __contains__(self, item):
+        return item in self._db
+
+
+
 
 
 class OrbDocDB(OrbDB, SpiderDocDB):
