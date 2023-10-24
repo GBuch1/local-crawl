@@ -8,15 +8,19 @@ from queue import SimpleQueue
 from typing import TextIO
 from spider.spider_models import *
 
-__author__ = "Boaty McBoatface, Planey McPlaneface"
+__author__ = "Garrett Buchanan", "Livingstone Rwagatare"
 __copyright__ = "Copyright 2023, Westmont College"
-__credits__ = ["Boaty McBoatface", "Planey McPlaneface", "Mike Ryu"]
+__credits__ = ["Garrett Buchanan", "Livingstone Rwagatare", "Mike Ryu"]
 __license__ = "MIT"
 __email__ = "mryu@westmont.edu"
 
+from src.spider.spider_models import SpiderDB
+
 
 class OrbDocFP(SpiderDocFP):
-    """TODO: Implement this class and complete the class docstring."""
+    """This class creates a fingerprint using the hash method. It also has equality and string methods.
+       The eq method compares fingerprints and returns a boolean value of True or False. The str method
+       returns the fingerprint as a string."""
 
     def __init__(self, doc_fp):
         self.doc_fp = doc_fp
@@ -35,7 +39,7 @@ class OrbDocFP(SpiderDocFP):
 
 
 class OrbDoc(SpiderDoc):
-    """TODO: Implement this class and complete the class docstring."""
+    """ rrrr """
 
     def __eq__(self, other) -> bool:
         if other is None or not isinstance(other, SpiderDoc) or self is None or not isinstance(other, SpiderDoc):
@@ -54,7 +58,8 @@ class OrbDoc(SpiderDoc):
 
 
 class OrbURI(SpiderURI):
-    """TODO: Implement this class and complete the class docstring."""
+    """Class that provides methods to deal with URIs. The eq method checks to see if one URI
+       is equal to another URI. The hash method returns the hash value of the URI."""
 
     def __eq__(self, other) -> bool:
         if other is None or not isinstance(other, OrbURI):
@@ -63,10 +68,12 @@ class OrbURI(SpiderURI):
             return self._uri == other.uri
 
     def __hash__(self):
-        return hash((self.uri, self.uri))
+        return hash(self.uri)
+
 
 class OrbContentProcessor(SpiderContentProcessor):
     """TODO: Implement this class and complete the class docstring.
+
 
     HINT:
         Lazily evaluate whether the content has been seen by checking if the document `__next__` method is about
@@ -74,7 +81,20 @@ class OrbContentProcessor(SpiderContentProcessor):
         fingerprint already stored in the database, but add any new document's fingerprint to the database.
 
     """
-    pass
+
+    def __init__(self, agent: OrbAgent):
+        super().__init__(agent)
+        self._seen_docs = set()  # this set will track documents that have been seen.
+
+    def process(self, soup: BeautifulSoup):
+        doc = OrbDoc()
+        doc._content = soup.get_text()  # extracts the text content of HTML
+        doc._title = soup.title.string if soup.title else ""  # extracts the title of the document if present
+        doc._compute_fingerprint()  # compute a unique fingerprint of the document
+
+        if doc._fingerprint not in self._agent.doc_db:  # Checking if the document fingerprint is in the agent's doc_db
+            self._agent.doc_db.add(doc._compute_fingerprint)  # if not seen before, add to the database.
+            self._seen_docs.add(doc)  # add the set of seen documents
 
 
 class OrbLinkProcessor(SpiderLinkProcessor):
@@ -87,7 +107,18 @@ class OrbLinkProcessor(SpiderLinkProcessor):
             {"parent": self._agent.uri.uri}
 
     """
-    pass
+
+    def __init__(self, agent: OrbAgent):
+        super().__init__(agent)
+        self._seen_uris = set()  # set to track seen uris
+
+    def process(self, link):
+        uri = OrbURI(link.get('href'))
+        uri._props = {"parent": self._agent.uri.uri}  # set the properties for the URI,specifically the parent link
+
+        if uri not in self._agent.uri_db:  # check if the URI is in the agent's uri_db
+            self._agent.uri_db.add(uri)  # if not seen before, add to the database
+            self._seen_uris.add(uri)  # add to the set of seen URIs
 
     @staticmethod
     def is_link_external(agent: SpiderAgent, link: str) -> bool:
@@ -113,8 +144,13 @@ class OrbLinkProcessor(SpiderLinkProcessor):
 
 class OrbAgent(SpiderAgent):
     """TODO: Implement this class and complete the class docstring."""
+
     def crawl(self) -> (OrbContentProcessor, OrbLinkProcessor):
-        pass  # HINT: use `BeautifulSoup` in this method implementation.
+        openfile = self._open_uri_as_file()
+        soup = BeautifulSoup(openfile, 'html.parser')
+        for soup in soup.find_all('a'):
+            soup.get_text()
+        openfile.close()
 
     def _open_uri_as_file(self) -> TextIO | None:
         """If `self._uri.uri` is not an external link, opens the file specified by the URI and returns it.
@@ -133,7 +169,7 @@ class OrbAgent(SpiderAgent):
         except OSError as e:
             if self._config["debug"]:
                 err_str = "Link from ...{} failed to open:\n".format(
-                        self._uri.props['parent'][-40:] if self._uri.props else 'unknown'
+                    self._uri.props['parent'][-40:] if self._uri.props else 'unknown'
                 )
                 print(err_str, e, file=stderr)
             return None
@@ -155,6 +191,7 @@ class OrbUriFrontier(SpiderUriFrontier):
         _next (OrbURI | None): `OrbURI` to be returned on the next call to `pop` or `peek`.
 
     """
+
     def __init__(self, seeds: list[OrbURI]) -> None:  # DO NOT MODIFY THIS CONSTRUCTOR!
         self._q: SimpleQueue = SimpleQueue()
         self._next: OrbURI | None = None
@@ -170,48 +207,38 @@ class OrbUriFrontier(SpiderUriFrontier):
 class OrbDB(SpiderDB):
     """TODO: Implement this class and complete the class docstring."""
 
-    def __int__(self):
-        self._database = []
+    def __init__(self):
+        self._DataBase = []
 
-    @abstractmethod
+    def add(self, item):
+        if item not in self._DataBase:
+            self._DataBase.append(item)
+            return True
+        else:
+            return False
+
+    def __contains__(self, item):
+        if item in self._DataBase:
+            return True
+        return False
+
     def __len__(self) -> int:
         """Returns the number of `SpiderArtifact`'s that are currently in the database."""
-        return len(self._database)
-       #pass
+        return len(self._DataBase)
 
-    @abstractmethod
-    def __contains__(self, item: SpiderArtifact) -> bool:
-        """Returns `True` if the given `SpiderArtifact` is in the database, `False` otherwise."""
-        return
-        #pass
-
-    @abstractmethod
-    def add(self, item: SpiderArtifact) -> bool:
-        """Attempts to add the given `SpiderArtifact` and returns `True` if the add operation was successful,
-        and `False` if the operation was unsuccessful and the given `SpiderArtifact` was not added to the database.
-
-        """
-
-        #pass
-
-    @abstractmethod
     def remove(self, item: SpiderArtifact) -> bool:
         """Attempts to remove the specified `SpiderArtifact` and returns `True` if the operation was successful,
         and `False` if the removal was unsuccessful and the given `SpiderArtifact` remains in the DB.
 
         """
-        pass
+        try:
+            self._DataBase.remove(item)
+        except:
+            return False
+        else:
+            return True
 
-    def add_all(self, *args):
-        """Adds all `SpiderArtifact`'s passed in via `args` by invoking `self.add` on each `SpiderArtifact` instance.
 
-        First instance in the `args` gets added first, and the last instance in the `args` gets added last.
-
-        """
-        for item in args:
-            self.add(item)
-
-    pass
 
 
 class OrbDocDB(OrbDB, SpiderDocDB):
