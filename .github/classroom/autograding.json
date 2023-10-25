@@ -1,6 +1,16 @@
 {
   "tests": [
     {
+      "name": "Install Python Dependencies",
+      "setup": "",
+      "run": "pip3 install bs4 parameterized -v --no-input",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": null
+    },
+    {
       "name": "All Unit Tests Pass",
       "setup": "",
       "run": "cd ./src; pwd; python3 -m unittest discover -v && echo \"All Unit Tests Passed.\"",
