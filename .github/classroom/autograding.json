@@ -1,0 +1,24 @@
+{
+  "tests": [
+    {
+      "name": "All Unit Tests Pass",
+      "setup": "",
+      "run": "cd ./src; pwd; python3 -m unittest discover -v && echo \"All Unit Tests Passed.\"",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": null
+    },
+    {
+      "name": "Check All TODO Comments Removed",
+      "setup": "",
+      "run": "pwd; echo \"Searching for TODOs ...\"; grep -r \"\\\"\\\"\\\"TODO:\" \"$(pwd)/src\" > TODOs.grep.txt; cat ./TODOs.grep.txt && rm ./TODOs.grep.txt",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": null
+    }
+  ]
+}
