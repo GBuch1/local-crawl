@@ -76,6 +76,7 @@ class OrbContentProcessor(SpiderContentProcessor):
 
     """
     def __int__(self, agent: SpiderAgent, fresh_content: str):
+        #   ^ BRUH  -Ryu
         super().__init__(agent)
         self._doc = OrbDoc(fresh_content) if fresh_content else None
         self._doc_db: SpiderDocDB() = self._agent.doc_db
@@ -106,6 +107,7 @@ class OrbLinkProcessor(SpiderLinkProcessor):
     """
 
     def __int__(self, agent: SpiderAgent, link_list: list):
+        #   ^ BRUH  -Ryu
         super().__init__(agent)
         self._counter = 0
         self._uri_db: SpiderUriDB = self._agent.uri_db
