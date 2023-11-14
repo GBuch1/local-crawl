@@ -59,7 +59,6 @@ The key takeaways from this assignment were how to become more proficient in obj
 
 ## Teamwork Report
 
-TODO: Answer the following questions. Your response is required to receive full credit. This section is not required if you worked alone.
 
 1. **How did you and your partner collaborate to complete this assignment?**
 
@@ -68,11 +67,9 @@ TODO: Answer the following questions. Your response is required to receive full 
 
 2. **How did you and your partner [equitably](https://www.marinhhs.org/sites/default/files/boards/general/equality_v._equity_04_05_2021.pdf) divide up the responsibilities?**
 
-    
+    We both spent time to look over the project and try our own implementations, that being said however I (Garrett) ended up doing      a large majority of the work. That isn't to discredit the effort that Livingstone put in becuase he did commit time, but I do        think it is noteworthy. No hard feelings but I want to maintain honesty and integrity in this process.
+   
 
+4. **What is one thing you learned from each other by collaborating?**
 
-3. **What is one thing you learned from each other by collaborating?**
-
-    TODO: Respond here.
-
-# TODO: DELETE ALL INSTRUCTIONS STARTING WITH "TODO" BEFORE YOUR FINAL SUBMISSION!
+    I learned that it is important to communicate explicitly on what is expected of each other when working on a project of this         nature. I also learned that it is important to have grace and understand of people's circumstances.
