@@ -22,40 +22,29 @@ class OrbDocFP(SpiderDocFP):
        The eq method compares fingerprints and returns a boolean value of True or False. The str method
        returns the fingerprint as a string."""
 
-    def __init__(self, doc_fp):
-        self.doc_fp = hash(doc_fp)
+    def __init__(self, doc_content):
+        self.doc_fp = hash(doc_content)
 
     def __hash__(self):  # returns the class attribute representing the fingerprint value
         return self.doc_fp
 
-    def __eq__(self, other) -> bool:    # checks that other is of type other or OrbDocFp
+    def __eq__(self, other) -> bool:  # checks that other is of type other or OrbDocFp
         if other is None or not isinstance(other, OrbDocFP):
             return False
         else:
             return self.doc_fp == other.doc_fp  # returns True if the two fingerprint values are equal
 
-    def __str__(self) -> str:   # turns the fingerprint into a string
+    def __str__(self) -> str:  # turns the fingerprint into a string
         return f"{self.doc_fp}"
 
 
 class OrbDoc(SpiderDoc):
-    """  """
+    """Class that provides a compute_fingerprint method that instantiates the OrbDocFP class and takes the
+       fingerprint of a document's content."""
 
-    # def __eq__(self, other) -> bool:
-    #     if other is None or not isinstance(other, SpiderDoc) or self is None or not isinstance(other, SpiderDoc):
-    #         return False
-    #     else:
-    #         return self.content == other.content and self.title == other.title
-    #
-    # def __hash__(self):
-    #     return hash(self.content, self.title)
-    #
-    # def __str__(self) -> str:
-    #     return f"{self.content}, {self.title}"
-
-    def _compute_fingerprint(self) -> OrbDocFP:  # instantiate the OrbDocFP and assign it to the _fingerprint attribute
+    def _compute_fingerprint(self) -> None:  # instantiate the OrbDocFP and assign it to the _fingerprint attribute
         # self._fingerprint = f"{self.content}{self.title}"
-        return OrbDocFP(self._fingerprint)
+        self._fingerprint = OrbDocFP(self._content)
 
 
 class OrbURI(SpiderURI):
@@ -67,90 +56,46 @@ class OrbURI(SpiderURI):
 
 
 class OrbContentProcessor(SpiderContentProcessor):
-    """TODO: Implement this class and complete the class docstring.
+    """This class takes a document and adds it to a document database after making sure the
+       document is not empty or a duplicate that is already present within the database."""
 
-
-    HINT:
-        Lazily evaluate whether the content has been seen by checking if the document `__next__` method is about
-        to return has its fingerprint already stored in `self._agent.doc_db`; skip any document that has its
-        fingerprint already stored in the database, but add any new document's fingerprint to the database.
-
-    """
     def __init__(self, agent: SpiderAgent, fresh_content: str):
         super().__init__(agent)  # calls the superclass constructor
-        self._doc = OrbDoc(fresh_content) if fresh_content else None    # instantiates OrbDoc if no content
-        self._doc_db: SpiderDocDB() = self._agent.doc_db    # must be type SpiderDocDB
+        self._doc = OrbDoc(fresh_content) if fresh_content else None  # instantiates OrbDoc if no content
+        self._doc_db: SpiderDocDB() = self._agent.doc_db  # must be type SpiderDocDB
 
     def __next__(self) -> SpiderDoc:
-        if self._doc is None:   # makes sure the doc is not empty
+        if self._doc is None:  # makes sure the doc is not empty
             raise StopIteration
         if self._doc.fingerprint in self._agent.doc_db:  # if the fingerprint has been seen stop iterating
             raise StopIteration
-        else:   # if not empty or duplicate add the fingerprint to the database and return the doc
+        else:  # if not empty or duplicate add the fingerprint to the database and return the doc
             self._doc_db.add(self._doc.fingerprint)
             return self._doc
 
-    # need to go through all the doc_fingerprints and add them to the list
-    # If they already exist, skip
-    # Add all FPs only once until there is nothing left
-
 
 class OrbLinkProcessor(SpiderLinkProcessor):
-    """TODO: Implement this class and complete the class docstring.
-
-    HINT:
-        Do the similar lazy evaluation as `OrbContentProcessor`, except for the URIs using `self._agent.uri_db`.
-        Your implementation must include instantiating `OrbURI`'s with its `props` attribute set as:
-            {"parent": self._agent.uri.uri}
-
-    """
+    """Class that iterates through a list of URIs, looks at one URI at a time, and makes sure the current
+       URI is within the URI database. If so add the URI to the URI database attribute that is created
+       withing the constructor, then stop iteration."""
 
     def __init__(self, agent: SpiderAgent, link_list: list):
         super().__init__(agent)  # call the superclass constructor
-        self._counter = 0   # set up a counter variable for iteration
+        self._counter = 0  # set up a counter variable for iteration
         self._uri_db: SpiderUriDB = self._agent.uri_db  # create a variable for the URI database
         self._link_list = link_list  # create a list to hold the gathered links
 
     def __next__(self) -> SpiderURI:
         while self._counter < len(self._link_list):  # iterate while contents in the link list
-            current_uri = self._link_list[self._counter]    # create a variable for the current URI
+            current_uri = self._link_list[self._counter]  # create a variable for the current URI
             uri = OrbURI(current_uri, {"parent": self._agent.uri.uri})  # instantiate OrbURI
             self._counter += 1  # advance the counter
             if uri in self._uri_db:  # if the URI is in the database continue
                 continue
-            else:   # if the URI is not in the database add it and return it
+            else:  # if the URI is not in the database add it and return it
                 self._uri_db.add(uri)
                 return uri
         raise StopIteration
-
-        # while self._counter < len(self._link_list):
-        #     link = self._link_list[self._counter]
-        #     # construct OrbURI with link
-        #     uri = OrbURI(link, {"parent": self._agent.uri.uri})
-        #     # check if the instance you created from above is in self._uri_db
-        #     if self._counter > len(self._uri_db):
-        #         raise StopIteration
-        #     elif uri in self._uri_db:
-        #         self._counter += 1
-        #     else:
-        #         self._counter += 1
-        #         self._uri_db += uri
-        #         return uri
-
-    # list empty?
-    # at the end of the list?
-    # is the link we have a duplicate
-    # if any of above three stop the iteration
-
-    # else
-    # 1. normalize link
-    # 2. OrbURI(link)
-    # 3. Update the agentDB
-    # 4. Return
-
-    # return OrbURI(link)
-    # Update the agent URI DB
-    # Pass in a list of links that are strings into link processor
 
     @staticmethod
     def is_link_external(agent: SpiderAgent, link: str) -> bool:
@@ -175,19 +120,24 @@ class OrbLinkProcessor(SpiderLinkProcessor):
 
 
 class OrbAgent(SpiderAgent):
-    """TODO: Implement this class and complete the class docstring."""
+    """This Class contains the crawl method which parses through a file using BeautifulSoup and finds the tags within
+       the HTML files of the corpus. it creates a variable which stores all the content within the documents of
+       the corpus and strips the content for formatting. It also finds the links within the documents of the corpus
+       and iterates through one link at a time, then adds it to the link list once the link has a complete path or if
+       the link is external. The method then returns OrbLinkProcessor and OrbContentProcessor as a tuple if the file
+       opened successfully, otherwise it returns an empty OrbLinkProcessor and OrbContentProcessor."""
 
     def crawl(self) -> (OrbContentProcessor, OrbLinkProcessor):
         openfile = self._open_uri_as_file()  # open the file
-        if openfile:    # if there is an opened file continue
+        if openfile:  # if there is an opened file continue
             read_file = openfile.read()  # read the file
             soup = BeautifulSoup(read_file, self._config["parser"])  # Create variable that calls BeautifulSoup
             found_tags = self.config["tags"]  # create variable found_tags which finds the tags in the HTML
 
-            content = ""    # create a variable that's an empty string to add content to later
+            content = ""  # create a variable that's an empty string to add content to later
             for tag_key in found_tags:  # iterate through the keys in the gathered tags
                 total_match = soup.find_all(tag_key, found_tags[tag_key])
-                for match in total_match:   # iterate through the matches and assign the content to the content variable
+                for match in total_match:  # iterate through the matches and assign the content to the content variable
                     new_string = match.text.strip() + " "
                     content += new_string
             fresh_content = content.strip()  # assign a variable to the fully stripped content
@@ -197,46 +147,24 @@ class OrbAgent(SpiderAgent):
 
             for link in links:  # iterate through and get all the links containing 'href'
                 true_link = link.get('href')
-                if true_link is not None:   # if there is a link and the link contains a '#' continue
+                if true_link is not None:  # if there is a link and the link contains a '#' continue
                     if '#' in true_link:
                         continue
                     if OrbLinkProcessor.is_link_external(self, true_link):  # if the link is external append to the list
                         link_list.append(true_link)
-                    else:   # otherwise find the path and assign it to the link then add it to the list
+                    else:  # otherwise find the path and assign it to the link then add it to the list
                         prev_slash_local = self.uri.uri.rfind("/")
                         path = self.uri.uri[:prev_slash_local]
                         final_link = path + "/" + true_link
                         link_list.append(final_link)
 
-            openfile.close()    # close the file
+            openfile.close()  # close the file
 
             # return OrbContentProcessor containing the content and OrbLinkProcessor containing the links as a tuple
             return OrbContentProcessor(self, fresh_content), OrbLinkProcessor(self, link_list)
 
-        else:   # if the file didn't open return empty OrbContent and OrbLink processors
+        else:  # if the file didn't open return empty OrbContent and OrbLink processors
             return OrbContentProcessor(self, ''), OrbLinkProcessor(self, [])
-
-        # for key in found_tags:  # create a loop to find the keys within the found tags
-        #     attr = self._config["tags"][key]  # create an attribute that contains the key
-        #     content = soup.find_all(found_tags, attr)  # for the keys in the "tags" config find the attributes
-        #     empty_string = ""
-        #     for tag in content:
-        #         empty_string += tag.text.strip() + " "  # add the content to an empty string and strip it
-        #     print(empty_string)
-        #     empty_string.strip()  # strip the contents of the string again
-        #
-        # links = soup.find_all('a')
-        # link_list = []
-        # for link in links:
-        #     true_link = link.get('href')
-        #     if link_list is not None:
-        #         if OrbLinkProcessor.is_link_external(self, true_link):
-        #             link_list.append(true_link)
-        #         else:
-        #             text = self._uri.uri
-        #             prev_slash = text.rfind("/")
-        #             path = text[:prev_slash]
-        #             link_list.append(path + '/' + true_link)
 
     def _open_uri_as_file(self) -> TextIO | None:
         """If `self._uri.uri` is not an external link, opens the file specified by the URI and returns it.
@@ -321,19 +249,22 @@ class OrbUriFrontier(SpiderUriFrontier):
 
 
 class OrbDB(SpiderDB):
-    """TODO: Implement this class and complete the class docstring."""
+    """This Class creates a database and uses it to store items. it has methods to add and remove a given item from
+       the database attribute created within the constructor, a contains method that performs a membership check to
+       see if an item is in the database, and a length method that returns the number of artifacts that are currently
+       within the database."""
 
     def __init__(self):  # create a list variable
         self._DataBase = []
 
-    def add(self, item):    # it an item is not a duplicate add it to the database
+    def add(self, item):  # it an item is not a duplicate add it to the database
         if item not in self._DataBase:
             self._DataBase.append(item)
             return True
         else:
             return False
 
-    def __contains__(self, item):   # perform a membership check on the item
+    def __contains__(self, item):  # perform a membership check on the item
         if item in self._DataBase:
             return True
         return False
