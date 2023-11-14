@@ -11,9 +11,9 @@ from text_processing.freq_utils import tokenize_file, print_frequencies
 from text_processing.freq_counter import compute_twogram_freq
 from nltk.corpus import stopwords
 
-__author__ = "Boaty McBoatface, Planey McPlaneface"
+__author__ = "Garrett Buchanan", "Livingstone Rwagatare"
 __copyright__ = "Copyright 2023, Westmont College"
-__credits__ = ["Boaty McBoatface", "Planey McPlaneface", "Mike Ryu"]
+__credits__ = ["Garrett Buchanan", "Livingstone Rwagatare", "Mike Ryu"]
 __license__ = "MIT"
 __email__ = "mryu@westmont.edu"
 
@@ -76,30 +76,42 @@ def validate_config(config, schema, sub=""):
 
 
 def run_sequential_crawl(doc_str, uri_frontier, doc_db, uri_db, config):
-    """TODO: Implement this function and complete the docstring to explain your logic.
+    """This method runs the crawl process on all the URIs that we have gathered
+       with our crawler."""
+    while uri_frontier:
+        next_uri = uri_frontier.pop()   # pop the URI to move to the net one
+        if next_uri is None:
+            break   # if next_uri return None that means all URIs have been crawled
+        agent = OrbAgent(next_uri, doc_db, uri_db, config["agent_config"])
+        debug_print_current_uri(next_uri, config)   # goes through the URIs and prints the current URI then pops it
+        content_processor, link_processor = agent.crawl()
+        documents = [document for document in content_processor]
+        links = [link for link in link_processor]
+        for document in documents:
+            debug_print_current_doc(document, config)
+            doc_str.write(document.content)  # writes the current document's content
+        uri_frontier.push_all(*links)
 
-    HINT:
-        Interweave `debug_print_*` functions provided to you (below) in your code
-        such that you can visually verify the crawling behavior you implemented.
-
-    """
-    pass
+    doc_str.seek(0)
 
 
 def remove_stopwords(words, config):
-    """TODO: Implement this function and complete the docstring.
-
-    HINT:
-        Use the config dictionary to determine whether to remove stopwords and if so, which language to use;
-        using NLTK's `stopwords` corpus, this should be a relatively simple function to implement.
-
-    """
-    pass
+    """This function removes all the stopwords from the content of a corpus using NLTK's stopwords corpus.
+       This is done so that only relevant words are returned."""
+    if not config['options']['remove_stopwords']:   # if no option to remove stopwords return the given words
+        return words
+    stop_words = set(stopwords.words(config['options']['stopwords_lang']))  # set of unique stopwords from config
+    not_stopwords = [word for word in words if word not in stop_words]  # if a word is not in stopwords add to list
+    return not_stopwords
 
 
 def print_twogram_freq(all_words, output_path, config):
-    """TODO: Implement this function and complete the docstring."""
-    pass
+    """This function computes the frequencies of the words within a corpus and returns the frequencies of the two
+       grams present within the corpus."""
+    frequencies = compute_twogram_freq(all_words)   # computes the two gram frequencies to return
+    encoding = config['agent_config']['encoding']
+    with open(output_path, 'w', encoding=encoding) as output_file:  # write the contents to the output file
+        print_frequencies(frequencies, output_file)
 
 
 def debug_print_current_uri(uri, config):
