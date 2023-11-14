@@ -14,8 +14,6 @@ __credits__ = ["Garrett Buchanan", "Livingstone Rwagatare", "Mike Ryu"]
 __license__ = "MIT"
 __email__ = "mryu@westmont.edu"
 
-from src.spider.spider_models import SpiderDB
-
 
 class OrbDocFP(SpiderDocFP):
     """This class creates a fingerprint using the hash method. It also has equality and string methods.
