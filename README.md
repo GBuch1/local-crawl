@@ -67,7 +67,7 @@ The key takeaways from this assignment were how to become more proficient in obj
 
 2. **How did you and your partner [equitably](https://www.marinhhs.org/sites/default/files/boards/general/equality_v._equity_04_05_2021.pdf) divide up the responsibilities?**
 
-    We both spent time to look over the project and try our own implementations, that being said however I (Garrett) ended up doing      a large majority of the work. That isn't to discredit the effort that Livingstone put in becuase he did commit time, but I do        think it is noteworthy. No hard feelings but I want to maintain honesty and integrity in this process.
+    We both spent time to look over the project and try our own implementations, that being said however I (Garrett) ended up doing      a large majority of the work. That isn't to discredit the effort that Livingstone put in because he did commit time, but I do        think it is noteworthy. No hard feelings but I want to maintain honesty and integrity in this process.
    
 
 4. **What is one thing you learned from each other by collaborating?**
