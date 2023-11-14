@@ -14,7 +14,7 @@
 
 ## Problem Description
 
-# The problem that needed to be solved was implementing multiple different classes and methods that provide the necessary functionality to run a simple web crawler that parses through two different corpuses and returns the frequencies of two grams within the corpus.
+### The problem that needed to be solved was implementing multiple different classes and methods that provide the necessary functionality to run a simple web crawler that parses through two different corpuses and returns the frequencies of two grams within the corpus.
 
 ## Description of the Solution
 
