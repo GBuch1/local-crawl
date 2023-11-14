@@ -1,0 +1,21 @@
+{
+  "seeds": [
+    "/Users/garrettbuchanan/documents/CS128/Assignment-2-Zips/shadow_on_the_sand/title.htm"
+  ],
+  "options": {
+    "remove_stopwords": true,
+    "stopwords_lang": "english"
+  },
+  "agent_config": {
+    "external": [
+      "https://",
+      "http://"
+    ],
+    "encoding": "UTF-8",
+    "parser": "html.parser",
+    "tags": {
+      "p": {}
+    },
+    "debug": true
+  }
+}
