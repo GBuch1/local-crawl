@@ -12,11 +12,11 @@
 * **Name(s)**: Garrett Buchanan, Livingstone Rwagatare
 * **Email(s)**: gbuchanan@westmont.edu, lrwagatare@westmont.edu
 
-## Problem Description
+### Problem Description
 
 ### The problem that needed to be solved was implementing multiple different classes and methods that provide the necessary functionality to run a simple web crawler that parses through two different corpuses and returns the frequencies of two grams within the corpus.
 
-## Description of the Solution
+### Description of the Solution
 
 ### The necessary components for the solution to this assignment are the implementation of classes that allow for manipulation and sorting of documents, their contents, and the URIs within them. It also includes implemetation of link, and content processors that work in congruence with a crawl method to parse through the HTML files using BeautifulSoup and return the content and links in a format that allows for the contents to be crawled.
 
