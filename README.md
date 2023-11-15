@@ -73,3 +73,8 @@ The key takeaways from this assignment were how to become more proficient in obj
 4. **What is one thing you learned from each other by collaborating?**
 
     I learned that it is important to communicate explicitly on what is expected of each other when working on a project of this         nature. I also learned that it is important to have grace and understand of people's circumstances.
+
+## Extra Credit Portion
+
+### What I Found Interesting in the New Corpus' Two Grams
+I thought it was interesting how many times that the two gram "copyright:1985 occured because I didn't even think about those aspect being included in the crawl which is pretty cool. I also thought it was funny that there was some made up words withing the corpus that are shown in two grams like "baga:darooz" which made me chuckle. It was cool that I could tell that the corpus had a fantasy style that was evident through many of the two grams. It even looked like the corpus containted some sort of roleplay aspect that were revealed by two grams like "18:enducrance" and "2:combat". I also was able to tell who was the main character in the corpus' story becuase of the two gram "joe:denver" occuring over 450 times. It's crazy how much information can be gleaned about a corpus soley from looking at the common two gram pairs present within it.
