@@ -76,5 +76,5 @@ The key takeaways from this assignment were how to become more proficient in obj
 
 ## Extra Credit Portion
 
-### What I Found Interesting in the New Corpus' Two Grams
+### What I Found Interesting in the New Corpus' Two Gram Frequencies
 I thought it was interesting how many times that the two gram "copyright:1985 occured because I didn't even think about those aspect being included in the crawl which is pretty cool. I also thought it was funny that there was some made up words withing the corpus that are shown in two grams like "baga:darooz" which made me chuckle. It was cool that I could tell that the corpus had a fantasy style that was evident through many of the two grams. It even looked like the corpus containted some sort of roleplay aspect that were revealed by two grams like "18:enducrance" and "2:combat". I also was able to tell who was the main character in the corpus' story becuase of the two gram "joe:denver" occuring over 450 times. It's crazy how much information can be gleaned about a corpus soley from looking at the common two gram pairs present within it.
